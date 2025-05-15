@@ -31,7 +31,10 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Activities</a>
+                <form method="POST" action="{{route('logout')}}">
+                    @csrf
+                    <button type="submit" class="dropdown-item" > Log Out </button>
+                </form>
             </div>
         </li>
     </ul>
