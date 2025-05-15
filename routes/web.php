@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// User Routes
-Route::controller(UserController::class)->middleware('auth')
+// ================================     User Routes     ==================================== //
+Route::prefix('user')->name('user.')->controller(UserController::class)->middleware('auth')
     ->group(function () {
-        route::get('/home', 'index');
+        route::get('/home', 'index')->name('home');
     });
-
-
 require __DIR__ . '/auth.php';
+
+
+
+
+
+
 
 
 
