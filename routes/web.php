@@ -24,8 +24,9 @@ require __DIR__ . '/auth.php';
 
 
 
-
-
+// Admin
+Route::view('/test', 'admin-dashboard.index')->name('test');
+Route::view('/test0', 'admin-dashboard.neededcomponents')->name('test');
 
 
 
