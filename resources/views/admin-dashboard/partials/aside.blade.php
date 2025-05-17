@@ -25,15 +25,15 @@
         <ul class="navbar-nav flex-fill w-100 mb-2">
 
             <!-- Dashboard -->
-            <li class="nav-item">
-                <a href="{{ route('test') }}" aria-expanded="false" class="nav-link">
+            <li class="nav-item  @yield('dashboard-active') ">
+                <a href="{{ route('admins.dashboard') }}" aria-expanded="false" class="nav-link">
                     <i class="fe fe-home fe-16"></i>
                     <span class="ml-3 item-text">Dashboard</span>
                 </a>
             </li>
 
             <!-- Admins -->
-            <li class="nav-item">
+            <li class="nav-item  @yield('admins-active') ">
                 <a href="#" aria-expanded="false" class="nav-link">
                     <i class="fe fe-user fe-16"></i>
                     <span class="ml-3 item-text">Admins</span>
@@ -41,7 +41,7 @@
             </li>
 
             <!-- Users -->
-            <li class="nav-item">
+            <li class="nav-item  @yield('users-active') ">
                 <a href="#" aria-expanded="false" class="nav-link">
                     <i class="fe fe-users fe-16"></i>
                     <span class="ml-3 item-text">Users</span>
@@ -49,7 +49,7 @@
             </li>
 
             <!-- Roles -->
-            <li class="nav-item">
+            <li class="nav-item  @yield('roles-active') ">
                 <a href="#" aria-expanded="false" class="nav-link">
                     <i class="fe fe-menu fe-16"></i>
                     <span class="ml-3 item-text">Roles</span>

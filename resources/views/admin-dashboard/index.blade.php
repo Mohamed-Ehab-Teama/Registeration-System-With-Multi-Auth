@@ -1,6 +1,7 @@
 @extends('admin-dashboard.master');
 
 @section('title', 'Home Page')
+@section('dashboard-active', 'active')
 
 
 @section('content')

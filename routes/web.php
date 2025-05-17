@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // ================================     User Routes     ==================================== //
-Route::prefix('user')->name('user.')->controller(UserController::class)->middleware('auth')
+Route::controller(UserController::class)
+    ->prefix('user')
+    ->name('user.')
+    ->middleware('auth')
     ->group(function () {
         route::get('/home', 'index')->name('home');
     });
@@ -24,9 +28,15 @@ require __DIR__ . '/auth.php';
 
 
 
-// Admin
-Route::view('/test', 'admin-dashboard.index')->name('test');
-Route::view('/test0', 'admin-dashboard.neededcomponents')->name('test');
+
+// ================================     Admin Routes     ==================================== //
+Route::controller(AdminController::class)
+->name('admins.')
+->prefix('admins')
+->group(function () {
+        Route::get('admin-dashboard', 'dashboard')->name('dashboard');
+        Route::get('/', 'index')->name('index');
+    });
 
 
 
