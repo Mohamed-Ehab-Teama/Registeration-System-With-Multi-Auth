@@ -31,7 +31,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="#">Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
-                <form method="POST" action="{{route('logout')}}">
+                <form method="POST" action="{{route('admins.logout')}}">
                     @csrf
                     <button type="submit" class="dropdown-item" > Log Out </button>
                 </form>

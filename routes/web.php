@@ -34,9 +34,12 @@ Route::controller(AdminController::class)
     ->name('admins.')
     ->prefix('admins')
     ->group(function () {
-        Route::get('admin-dashboard', 'dashboard')->name('dashboard');
-        // Route::get('/', 'index')->name('index');
+        Route::get('/admin-dashboard', 'dashboard')->name('dashboard');
+
+        // ======================   Admins  ============================================== //
         Route::resource('admins', AdminController::class);
+
+
         require __DIR__ . '/adminAuth.php';
     });
 
