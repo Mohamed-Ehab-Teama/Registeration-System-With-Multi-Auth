@@ -6,8 +6,10 @@
 @section('content')
 
 
-    <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="POST" action="{{ route('password.email') }}">
+    <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="POST" action="{{ route('admins.password.email') }}">
         @csrf
+
+        <h1 class="text-center"> Admin Auth </h1>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

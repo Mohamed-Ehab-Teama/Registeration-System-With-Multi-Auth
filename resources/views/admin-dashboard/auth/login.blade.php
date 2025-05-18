@@ -6,9 +6,10 @@
 @section('content')
 
 
-
-    <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="POST" action="{{ route('login') }}">
+    <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" method="POST" action="{{ route('admins.login') }}">
         @csrf
+
+        <h1 class="text-center"> Admin Auth </h1>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -51,7 +52,7 @@
 
         {{-- Forget Password ? --}}
         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            href="{{ route('password.request') }}">
+            href="{{ route('admins.password.request') }}">
             {{ __('Forgot your password?') }}
         </a>
 

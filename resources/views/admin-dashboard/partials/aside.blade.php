@@ -34,7 +34,7 @@
 
             <!-- Admins -->
             <li class="nav-item  @yield('admins-active') ">
-                <a href="#" aria-expanded="false" class="nav-link">
+                <a href="{{ route('admins.index') }}" aria-expanded="false" class="nav-link">
                     <i class="fe fe-user fe-16"></i>
                     <span class="ml-3 item-text">Admins</span>
                 </a>

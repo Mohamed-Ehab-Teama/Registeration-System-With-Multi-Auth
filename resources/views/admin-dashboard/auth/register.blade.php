@@ -8,8 +8,10 @@
 
 
 
-    <form class="col-lg-6 col-md-8 col-10 mx-auto" method="POST" action="{{ route('register') }}">
+    <form class="col-lg-6 col-md-8 col-10 mx-auto" method="POST" action="{{ route('admins.register') }}">
         @csrf
+
+        <h1 class="text-center"> Admin Auth </h1>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
