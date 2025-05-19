@@ -42,13 +42,13 @@
                         </td>
                         <td>
                             <!-- Show Action -->
-                            <a href="{{ route('admins.admins.show', 1) }}" class="btn btn-primary"> Show </a>
+                            <a href="{{ route('admins.admins.show', $admin->id) }}" class="btn btn-primary"> Show </a>
 
                             <!-- Edit Action -->
-                            <a href="{{ route('admins.admins.edit', 1) }}" class="btn btn-info"> Edit </a>
+                            <a href="{{ route('admins.admins.edit', $admin->id) }}" class="btn btn-info"> Edit </a>
 
                             <!-- Delete Action -->
-                            <form class="d-inline" action="{{ route('admins.admins.destroy', 1) }}" method="post">
+                            <form class="d-inline" action="{{ route('admins.admins.destroy', $admin->id) }}" method="post">
                                 @csrf
                                 <button class="btn btn-danger"> Delete </button>
                             </form>

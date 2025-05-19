@@ -20,20 +20,22 @@
                     <!-- Name -->
                     <div class="form-group mb-3">
                         <label for="simpleinput">Name</label>
-                        <input disabled type="name" name="name"  id="simpleinput" class="form-control">
+                        <input disabled  class="form-control" value="{{ $admin->name }}">
                     </div>
 
                     <!-- Email -->
                     <div class="form-group mb-3">
                         <label for="example-email">Email</label>
-                        <input disabled type="email" id="example-email" name="example-email" class="form-control"  name="email" >
+                        <input disabled class="form-control" value="{{ $admin->email }}">
                     </div>
 
                     <!-- Roles -->
                     <div class="form-group mb-3">
                         <label class="form-label"> Role: </label>
-                        <select disabled class="border form-control" name="role">
-                            <option value=""> Role </option>
+                        <select disabled class="border form-control">
+                            <option value="">
+                                {{ $admin->role }}
+                            </option>
                         </select>
                     </div>
 

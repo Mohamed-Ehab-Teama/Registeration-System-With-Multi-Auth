@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 
 class AdminController extends Controller
 {
@@ -13,14 +16,13 @@ class AdminController extends Controller
     {
         return view('admin-dashboard.index');
     }
-    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $admins = Admin::all();
-
         return view('admin-dashboard.admins.index', get_defined_vars());
     }
 
@@ -29,15 +31,21 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin-dashboard.admins.create');
+        $roles = Role::where('guard_name', 'admin')->get();
+        return view('admin-dashboard.admins.create', get_defined_vars());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
-        //
+        $adminData = $request->validated();
+        $admin = Admin::create($adminData);
+        if (isset($adminData['role'])) {
+            $admin->assignRole($adminData['role']);
+        }
+        return back()->with('success', "Admin Made Successfully");
     }
 
     /**
@@ -45,7 +53,9 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin-dashboard.admins.show');
+        $admin = Admin::find($id);
+        // dd($admin);
+        return view('admin-dashboard.admins.show', get_defined_vars());
     }
 
     /**
@@ -53,15 +63,20 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin-dashboard.admins.edit');
+        $roles = Role::all();
+        $admin = Admin::find($id);
+        return view('admin-dashboard.admins.edit', get_defined_vars());
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAdminRequest $request, Admin $admin)
     {
-        //
+        $adminData = $request->validated();
+        $admin->update($adminData);
+        $admin->syncRoles([$adminData['role']]);
+        return back()->with('success', "Admin Updated Successfully");
     }
 
     /**
