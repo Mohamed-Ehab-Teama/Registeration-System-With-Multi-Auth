@@ -7,57 +7,70 @@
 @section('content')
 
 
-    <!-- simple table -->
-    <div class="col-md-12 my-4">
+<!-- simple table -->
+<div class="col-md-12 my-4">
 
-        {{-- Add New Admin --}}
-        <div class="text-right my-3">
-            <a href="#" class="btn btn-primary text-white"> Add New </a>
-        </div>
+    {{-- Add New Admin --}}
+    <div class="text-right my-3">
+        <a href="{{ route('admins.admins.create') }}" class="btn btn-primary text-white"> Add New </a>
+    </div>
 
-        <div class="card shadow">
-            <div class="card-body">
-                <h5 class="card-title"> All Admins </h5>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            {{-- <th>Role</th> --}}
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <div class="card shadow">
+        <div class="card-body">
+            <h5 class="card-title"> All Admins </h5>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th class="w-25">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                        @if (count($admins) > 0)
-                            @foreach ($admins as $admin)
-                                <tr>
-                                    <td> {{ $admin->name }} </td>
-                                    <td> {{ $admin->email }} </td>
-                                    {{-- <td><span class="badge badge-pill badge-warning"> 
-                                        {{$admin->name}} 
-                                    </span></td> --}}
-                                    <td>
-                                        Actions
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="3">
-                                    <div class="alert alert-danger text-center m-1">
-                                        No Data Avaliale Right Now!!
-                                    </div>
-                                </td>
-                            </tr>
-                        @endif
+                    @if (count($admins) > 0)
+                    @foreach ($admins as $admin)
+                    <tr>
+                        <td> {{ $admin->name }} </td>
+                        <td> {{ $admin->email }} </td>
+                        <td>
+                            <span class="badge badge-pill badge-warning p-2">
+                                Role
+                                <!-- {{$admin->name}}  -->
+                            </span>
+                        </td>
+                        <td>
+                            <!-- Show Action -->
+                            <a href="{{ route('admins.admins.show', 1) }}" class="btn btn-primary"> Show </a>
+
+                            <!-- Edit Action -->
+                            <a href="{{ route('admins.admins.edit', 1) }}" class="btn btn-info"> Edit </a>
+
+                            <!-- Delete Action -->
+                            <form class="d-inline" action="{{ route('admins.admins.destroy', 1) }}" method="post">
+                                @csrf
+                                <button class="btn btn-danger"> Delete </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td colspan="3">
+                            <div class="alert alert-danger text-center m-1">
+                                No Data Avaliale Right Now!!
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
 
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-    <!-- simple table -->
+</div>
+<!-- simple table -->
 
 @endsection

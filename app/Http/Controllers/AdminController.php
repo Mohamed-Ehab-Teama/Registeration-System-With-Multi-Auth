@@ -29,7 +29,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin-dashboard.admins.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin-dashboard.admins.show');
     }
 
     /**
@@ -53,7 +53,7 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin-dashboard.admins.edit');
     }
 
     /**
