@@ -14,7 +14,7 @@
     <div class="col-12">
 
         <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('success')" />
+        <x-auth-session-status class="mb-4" :status="session('success')" />
 
         <h2 class="page-title">Edit Admin</h2>
 
@@ -52,14 +52,29 @@
                             <x-input-error :messages="$errors->get('role')" class="mt-2" />
                         </div>
 
+                        <!-- Password -->
+                        <div class="form-group mb-3">
+                            <label for="example-password">Password</label>
+                            <input type="password" id="example-password" class="form-control" name="password">
+                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group mb-3">
+                            <label for="example-password">Password</label>
+                            <input type="password" id="example-password" class="form-control"
+                                name="password_confirmation">
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                        </div>
+
                         <!-- Button -->
                         <button type="submit" class="btn btn-primary"> Update </button>
 
-                    </div> 
+                    </div>
 
                 </div>
             </div>
-        </div> 
+        </div>
 
     </div>
 

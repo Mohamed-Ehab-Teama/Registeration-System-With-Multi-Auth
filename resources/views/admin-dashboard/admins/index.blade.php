@@ -1,4 +1,4 @@
-@extends('admin-dashboard.master');
+@extends('admin-dashboard.master')
 
 @section('title', 'All Admins')
 @section('admins-active', 'active')
@@ -9,6 +9,9 @@
 
 <!-- simple table -->
 <div class="col-md-12 my-4">
+
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('success')" />
 
     {{-- Add New Admin --}}
     <div class="text-right my-3">
@@ -42,15 +45,16 @@
                         </td>
                         <td>
                             <!-- Show Action -->
-                            <a href="{{ route('admins.admins.show', $admin->id) }}" class="btn btn-primary"> Show </a>
+                            <a href="{{ route('admins.admins.show', ['admin' => $admin]) }}" class="btn btn-primary"> Show </a>
 
                             <!-- Edit Action -->
-                            <a href="{{ route('admins.admins.edit', $admin->id) }}" class="btn btn-info"> Edit </a>
+                            <a href="{{ route('admins.admins.edit', ['admin' => $admin]) }}" class="btn btn-info"> Edit </a>
 
                             <!-- Delete Action -->
-                            <form class="d-inline" action="{{ route('admins.admins.destroy', $admin->id) }}" method="post">
+                            <form class="d-inline" action="{{ route('admins.admins.destroy', ['admin' => $admin]) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-danger"> Delete </button>
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"> Delete </button>
                             </form>
                         </td>
                     </tr>

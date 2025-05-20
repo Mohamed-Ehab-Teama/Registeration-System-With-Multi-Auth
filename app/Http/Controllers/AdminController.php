@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 
+use function Laravel\Prompts\confirm;
+
 class AdminController extends Controller
 {
 
@@ -45,15 +47,14 @@ class AdminController extends Controller
         if (isset($adminData['role'])) {
             $admin->assignRole($adminData['role']);
         }
-        return back()->with('success', "Admin Made Successfully");
+        return to_route('admins.admins.index')->with('success', "Admin Made Successfully");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Admin $admin)
     {
-        $admin = Admin::find($id);
         // dd($admin);
         return view('admin-dashboard.admins.show', get_defined_vars());
     }
@@ -61,10 +62,9 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Admin $admin)
     {
         $roles = Role::all();
-        $admin = Admin::find($id);
         return view('admin-dashboard.admins.edit', get_defined_vars());
     }
 
@@ -73,17 +73,22 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
+        // dd($admin);
         $adminData = $request->validated();
+        if ($adminData['password'] == null) {
+            unset($adminData['password']);
+        }
         $admin->update($adminData);
-        $admin->syncRoles([$adminData['role']]);
-        return back()->with('success', "Admin Updated Successfully");
+        // $admin->syncRoles([$adminData['role']]);
+        return to_route('admins.admins.index')->with('success', "Admin Updated Successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Admin $admin)
     {
-        //
+        $admin->delete();
+        return to_route('admins.admins.index')->with('success', "Admin Deleted Successfully");
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAdminRequest extends FormRequest
@@ -24,9 +25,9 @@ class UpdateAdminRequest extends FormRequest
         $id = $this->route()->admin->id ?? null;
         return [
             'name' => 'required|string',
-            'email' => 'required|email|unique:admins,email,except,'.$id,
+            'email' => 'required|email|unique:admins,email,'. $id,
             'role' => 'nullable',
-            'password' => 'required|confirmed'
+            'password' => 'confirmed'
         ];
     }
 }
