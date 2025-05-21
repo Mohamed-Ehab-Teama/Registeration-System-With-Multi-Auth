@@ -22,7 +22,7 @@ Route::controller(UserController::class)
     ->name('user.')
     ->middleware('auth')
     ->group(function () {
-        route::get('/home', 'index')->name('home');
+        route::get('/home', 'dash')->name('home');
     });
 require __DIR__ . '/auth.php';
 
@@ -30,14 +30,16 @@ require __DIR__ . '/auth.php';
 
 
 // ================================     Admin Routes     ==================================== //
-Route::controller(AdminController::class)
+Route::prefix('admins')
     ->name('admins.')
-    ->prefix('admins')
     ->group(function () {
-        Route::get('/admin-dashboard', 'dashboard')->name('dashboard');
+        Route::view('/admin-dashboard', 'admin-dashboard.index')->name('dashboard');
 
         // ======================   Admins  ============================================== //
         Route::resource('admins', AdminController::class);
+
+        // ======================   Users  ============================================== //
+        Route::resource('users', UserController::class);
 
 
         require __DIR__ . '/adminAuth.php';

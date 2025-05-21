@@ -13,12 +13,6 @@ use function Laravel\Prompts\confirm;
 class AdminController extends Controller
 {
 
-
-    public function dashboard()
-    {
-        return view('admin-dashboard.index');
-    }
-
     /**
      * Display a listing of the resource.
      */
