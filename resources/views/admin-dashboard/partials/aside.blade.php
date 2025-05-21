@@ -50,7 +50,7 @@
 
             <!-- Roles -->
             <li class="nav-item  @yield('roles-active') ">
-                <a href="#" aria-expanded="false" class="nav-link">
+                <a href="{{ route('admins.roles.index') }}" aria-expanded="false" class="nav-link">
                     <i class="fe fe-menu fe-16"></i>
                     <span class="ml-3 item-text">Roles</span>
                 </a>
