@@ -34,17 +34,18 @@ require __DIR__ . '/auth.php';
 Route::prefix('admins')
     ->name('admins.')
     ->group(function () {
-        Route::view('/admin-dashboard', 'admin-dashboard.index')->name('dashboard');
+
+        Route::view('/admin-dashboard', 'admin-dashboard.index')->name('dashboard')
+            ->middleware('admin');
 
         // ======================   Admins  ============================================== //
-        Route::resource('admins', AdminController::class);
+        Route::resource('admins', AdminController::class)->middleware('admin');
 
         // ======================   Users  ============================================== //
-        Route::resource('users', UserController::class);
-        
-        // ======================   Roles  ============================================== //
-        Route::resource('roles', RoleController::class);
+        Route::resource('users', UserController::class)->middleware('admin');
 
+        // ======================   Roles  ============================================== //
+        Route::resource('roles', RoleController::class)->middleware('admin');
 
         require __DIR__ . '/adminAuth.php';
     });

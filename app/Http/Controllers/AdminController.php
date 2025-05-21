@@ -38,8 +38,9 @@ class AdminController extends Controller
     {
         $adminData = $request->validated();
         $admin = Admin::create($adminData);
-        if (isset($adminData['role'])) {
-            $admin->assignRole($adminData['role']);
+        if (isset($adminData['role'])) 
+        {
+            $admin->assignRole([$adminData['role']]);
         }
         return to_route('admins.admins.index')->with('success', "Admin Made Successfully");
     }
@@ -73,7 +74,7 @@ class AdminController extends Controller
             unset($adminData['password']);
         }
         $admin->update($adminData);
-        // $admin->syncRoles([$adminData['role']]);
+        $admin->syncRoles([$adminData['role']]);
         return to_route('admins.admins.index')->with('success', "Admin Updated Successfully");
     }
 
