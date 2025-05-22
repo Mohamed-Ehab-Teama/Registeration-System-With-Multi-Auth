@@ -5,13 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
+use function Laravel\Prompts\confirm;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 
-use function Laravel\Prompts\confirm;
-
 class AdminController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('check_permission:add_user')->only(['create', 'store']);
+        $this->middleware('check_permission:show_user')->only(['show']);
+        $this->middleware('check_permission:edit_user')->only(['edit', 'update']);
+        $this->middleware('check_permission:delete_user')->only(['destroy']);
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -27,6 +41,14 @@ class AdminController extends Controller
      */
     public function create()
     {
+        // Gate
+        // Gate::forUser(Auth::guard('admin')->user())->authorize('add_user');
+
+        // Policy
+        // if (Auth::guard('admin')->user()->cannot('add_user') )
+        // {
+        //     abort(403);
+        // }
         $roles = Role::where('guard_name', 'admin')->get();
         return view('admin-dashboard.admins.create', get_defined_vars());
     }
@@ -38,8 +60,7 @@ class AdminController extends Controller
     {
         $adminData = $request->validated();
         $admin = Admin::create($adminData);
-        if (isset($adminData['role'])) 
-        {
+        if (isset($adminData['role'])) {
             $admin->assignRole([$adminData['role']]);
         }
         return to_route('admins.admins.index')->with('success', "Admin Made Successfully");

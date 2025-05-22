@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Admin;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Gate::define('add_user', function (Admin $admin) {
+        //     return $admin->hasAnyPermission('add_user') ? Response::allow()
+        //         : Response::deny('You must be an administrator. UnAuthorized Maaaan!!!!!!');
+        // });
     }
 }
