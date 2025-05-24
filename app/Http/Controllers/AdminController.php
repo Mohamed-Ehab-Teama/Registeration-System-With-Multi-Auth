@@ -20,6 +20,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
+        // Checking Permissions Using MiddleWare
         $this->middleware('check_permission:add_user')->only(['create', 'store']);
         $this->middleware('check_permission:show_user')->only(['show']);
         $this->middleware('check_permission:edit_user')->only(['edit', 'update']);
